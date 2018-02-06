@@ -7,23 +7,25 @@ using Newtonsoft.Json;
 
 namespace ConsoleApplication1
 {
-    class Result
-    {
-
-    }
     class Program
     {
         static void Main(string[] args)
         {
             System.Net.WebClient wc = new System.Net.WebClient();
+
             string word;
             word = System.Console.ReadLine();
-           
-            string webData = wc.DownloadString("http://api.datamuse.com/words?sp="+word+"&qe=sp&md=d");
-            System.Console.WriteLine(webData);
 
-            //JsonConvert
+            string url = "http://api.datamuse.com/words?sp=" + word + "&qe=sp&md=d&max=1&lc=the";
+            string webData = wc.DownloadString(url);
+
+            var res = JsonConvert.DeserializeObject<dynamic>(webData);
+
+            var def = res[0].defs;
+            System.Console.WriteLine(def); //def[0]  for 1 definition
+
 
         }
     }
 }
+
