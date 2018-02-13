@@ -13,7 +13,9 @@ namespace ConsoleApplication1
         {
             string word;
             word = System.Console.ReadLine();
+            // Create a new instance of the definition class
             definition def = new definition();
+            // Make a dynamic object of the definition
             dynamic result = def.getDef(word);
 
             System.Console.WriteLine(result); //def[0]  for 1 definition
