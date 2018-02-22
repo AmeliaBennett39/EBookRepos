@@ -4,49 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Define;
-using System.Speech;
-using System.Speech.Synthesis;
+using Newtonsoft.Json.Linq;
 
 namespace ConsoleApplication1
 {
     class Program
     {
         static void Main(string[] args)
-            {
-            string word;
+        {
+            string sentence;
+            int place;
+            Console.WriteLine("Input the sentence.");
+            sentence = System.Console.ReadLine();
+            Console.WriteLine("Input position of the word (0 is first)");
+            place = int.Parse(System.Console.ReadLine());
 
-            word = System.Console.ReadLine();
             // Create a new instance of the definition class
             definition def = new definition();
             // Make a dynamic object of the definition
-            dynamic result = def.getDef(word);
+            List<string> strResults = def.getDef(sentence, place);//def.getWebsterDef(sentence, place);
 
-            //Except handler in case dictionary cannot recognize word
-            try
+            for (int i = 0; i < strResults.Count(); i++)
             {
-                   System.Console.WriteLine(result); //def[0] for 1 definition
-
-                //SpeechSynthesizer reader = new SpeechSynthesizer();
-                //reader.SpeakAsync(result);
-
-                using (SpeechSynthesizer synth = new SpeechSynthesizer())
-                {
-
-                    // Configure the audio output. 
-                    synth.SetOutputToDefaultAudioDevice();
-
-                    // Speak a string synchronously.
-                    synth.Speak((string)result[0]);
-                }
-                
-                //Console.WriteLine();
-                Console.WriteLine("Press any key to exit...");
-                Console.ReadKey();
+                Console.WriteLine(strResults[i]);
             }
-            catch (Exception)
-            {
-                Console.WriteLine("Unable to define word.");
-            }
+
         }
     }
 }
