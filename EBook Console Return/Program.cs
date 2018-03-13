@@ -22,7 +22,7 @@ namespace ConsoleApplication1
             // Create a new instance of the definition class
             definition def = new definition();
             // Make a dynamic object of the definition
-            List<string> strResults = def.getDef(sentence, place);//def.getWebsterDef(sentence, place);
+            List<string> strResults = def.getWebsterDef(sentence, place);//def.getWebsterDef(sentence, place);
 
             for (int i = 0; i < strResults.Count(); i++)
             {
